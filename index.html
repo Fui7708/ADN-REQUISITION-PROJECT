@@ -1,0 +1,435 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nyeri Requisition Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="Style.css" />
+  </head>
+  <body>
+    <div id="authView" class="auth-screen">
+      <div class="auth-card">
+        <div class="auth-brand">
+          <span class="brand-mark"
+            ><img
+              class="img1"
+              src="images/file_0000000051047230a592fd301e83b357.png"
+              alt="Archdiocese of Nyeri Youth Faith on Fire logo"
+          /></span>
+          <div>
+            <small>Archdiocese of Nyeri</small>
+            <strong>Requisition Portal</strong>
+          </div>
+        </div>
+
+        <div class="auth-header">
+          <div class="auth-toggle" role="tablist" aria-label="Authentication mode">
+            <button class="auth-tab active" type="button" data-mode="signup">
+              Create Account
+            </button>
+            <button class="auth-tab" type="button" data-mode="login">
+              Login
+            </button>
+          </div>
+        </div>
+
+        <form id="signupForm" class="auth-form active" novalidate>
+          <div class="field-row">
+            <label>
+              Full name
+              <input id="signupFullName" name="fullName" type="text" placeholder="Jane Doe" required />
+            </label>
+          </div>
+          <div class="field-row">
+            <label>
+              Email address
+              <input id="signupEmail" name="email" type="email" placeholder="you@example.com" required />
+            </label>
+          </div>
+          <div class="field-row">
+            <label>
+              Password
+              <div class="password-field">
+                <input id="signupPassword" name="password" type="password" placeholder="At least 6 characters" required />
+                <button type="button" class="password-toggle" data-target="signupPassword" aria-label="Show password" title="Show password">
+                  <i class="bi bi-eye-slash"></i>
+                </button>
+              </div>
+            </label>
+          </div>
+          <div class="field-row two-col">
+            <label>
+              Institution
+              <input id="signupInstitution" name="institution" type="text" placeholder="St. Mary’s Cathedral" required />
+            </label>
+            <label>
+              Role
+              <input id="signupRole" name="role" type="text" placeholder="Finance Officer" required />
+            </label>
+          </div>
+          <div class="field-row">
+            <button type="button" class="upload-btn" id="profileUploadBtn">
+              Upload profile photo
+            </button>
+            <input id="profilePhotoUrl" type="hidden" name="profilePhotoUrl" />
+            <div id="uploadPreview" class="upload-preview hidden"></div>
+          </div>
+          <button type="submit" class="submit-btn">Create account</button>
+        </form>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <div class="field-row">
+            <label>
+              Email address
+              <input id="loginEmail" name="email" type="email" placeholder="you@example.com" required />
+            </label>
+          </div>
+          <div class="field-row">
+            <label>
+              Password
+              <div class="password-field">
+                <input id="loginPassword" name="password" type="password" placeholder="Enter your password" required />
+                <button type="button" class="password-toggle" data-target="loginPassword" aria-label="Show password" title="Show password">
+                  <i class="bi bi-eye-slash"></i>
+                </button>
+              </div>
+            </label>
+          </div>
+          <button type="submit" class="submit-btn">Login to dashboard</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="dashboardView" class="app-shell hidden">
+      <aside class="sidebar">
+        <a class="brand" href="#"
+          ><span class="brand-mark"><img class="img1" src="images/file_0000000051047230a592fd301e83b357.png" alt="Archdiocese of Nyeri Youth Faith on Fire logo"/></span
+          ><span>Archdiocese <b>of Nyeri</b></span></a
+        >
+        <p class="portal-name">REQUISITION PORTAL</p>
+        <nav>
+          <a class="nav-item active" href="#dashboard"
+            ><span>▦</span> Dashboard</a
+          >
+          <a class="nav-item" href="#requests"
+            ><span>□</span> My Requisitions <em>3</em></a
+          >
+          <a class="nav-item" href="#approvals"
+            ><span>✓</span> Approvals <em>5</em></a
+          >
+          <a class="nav-item" href="#reports"><span>◫</span> Reports</a>
+          <a class="nav-item" href="#institutions"
+            ><span>⌂</span> Institutions</a
+          >
+        </nav>
+        <div class="sidebar-bottom">
+          <a class="nav-item" href="#support"
+            ><span>?</span> Help &amp; Support</a
+          >
+          <div class="profile">
+            <div class="avatar" id="profileAvatar">E</div>
+            <div><strong id="profileName">Eunice</strong><small>Finance Officer</small></div>
+            <button type="button" id="logoutButton" aria-label="Log out">•••</button>
+          </div>
+        </div>
+      </aside>
+      <main>
+        <header class="topbar">
+          <nav
+            class="navbar navbar-dark mobile-navbar"
+            aria-label="Mobile navigation"
+          >
+            <div class="container-fluid p-0">
+              <button
+                class="navbar-toggler mobile-menu"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#requisitionNav"
+                aria-controls="requisitionNav"
+                aria-label="Open navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </nav>
+          <div class="breadcrumb">Overview <span>/</span> Dashboard</div>
+          <div class="top-actions">
+            <button
+              class="icon-button notification-button"
+              type="button"
+              aria-label="Notifications"
+            >
+              <i class="bi bi-bell"></i>
+              <span class="notification-dot" aria-hidden="true"></span>
+            </button>
+            <button
+              class="icon-button logout-button"
+              type="button"
+              aria-label="Log out"
+              title="Log out"
+              id="headerLogoutButton"
+            >
+              <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            </button>
+          </div>
+        </header>
+        <section class="content" id="dashboard">
+          <div class="welcome-row">
+            <div>
+              <p class="eyebrow" id="dashboardDate">MONDAY, 13 SEPTEMBER 2026</p>
+              <h1 id="dashboardGreeting">Good Morning, <span id="greetingName">Eunice</span><span>👋</span></h1>
+              <p class="subtext">
+                Here’s an overview of your requisition activity.
+              </p>
+            </div>
+            <button class="new-request" id="newRequest">
+              <span>＋</span> New Requisition
+            </button>
+          </div>
+          <section class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-icon amber">▣</div>
+              <div>
+                <p>Draft Requests</p>
+                <strong>03</strong><small>Awaiting submission</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-icon blue">◷</div>
+              <div>
+                <p>Pending Approval</p>
+                <strong>12</strong><small class="up">↑ 2 since last week</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-icon green">✓</div>
+              <div>
+                <p>Approved This Month</p>
+                <strong>24</strong><small>Worth KES 1,284,500</small>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-icon red">!</div>
+              <div>
+                <p>Needs Attention</p>
+                <strong>02</strong><small>Action required</small>
+              </div>
+            </article>
+          </section>
+          <section class="dashboard-grid">
+            <article class="panel" id="requests">
+              <div class="panel-header">
+                <div>
+                  <h2>Recent Requisitions</h2>
+                  <p>Latest requests from your institution</p>
+                </div>
+                <a href="#all">View all →</a>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>REFERENCE</th>
+                      <th>DESCRIPTION</th>
+                      <th>AMOUNT</th>
+                      <th>STATUS</th>
+                      <th>DATE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <b>REQ-2026-0418</b><small>St. Mary’s Cathedral</small>
+                      </td>
+                      <td>Office furniture &amp; fittings</td>
+                      <td>KES 185,000</td>
+                      <td><span class="status pending">● Pending</span></td>
+                      <td>Today, 09:42</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>REQ-2026-0417</b><small>St. Mary’s Cathedral</small>
+                      </td>
+                      <td>Computer equipment</td>
+                      <td>KES 342,000</td>
+                      <td><span class="status approved">● Approved</span></td>
+                      <td>Yesterday</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>REQ-2026-0414</b><small>St. Mary’s Cathedral</small>
+                      </td>
+                      <td>Church sound system repair</td>
+                      <td>KES 76,500</td>
+                      <td><span class="status review">● In review</span></td>
+                      <td>10 Sep 2026</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>REQ-2026-0409</b><small>St. Mary’s Cathedral</small>
+                      </td>
+                      <td>Stationery supplies</td>
+                      <td>KES 24,850</td>
+                      <td><span class="status returned">● Returned</span></td>
+                      <td>08 Sep 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+            <aside class="side-panels" id="approvals">
+              <article class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h2>Awaiting Your Action</h2>
+                    <p>Requests requiring your review</p>
+                  </div>
+                  <span class="count">5</span>
+                </div>
+                <div class="action-item">
+                  <div class="initials">PN</div>
+                  <div>
+                    <b>St. Peter’s Parish</b>
+                    <p>Building maintenance <strong>· KES 218,000</strong></p>
+                  </div>
+                  <button>Review</button>
+                </div>
+                <div class="action-item">
+                  <div class="initials teal">SM</div>
+                  <div>
+                    <b>Mary Immaculate School</b>
+                    <p>
+                      Science laboratory supplies <strong>· KES 96,400</strong>
+                    </p>
+                  </div>
+                  <button>Review</button>
+                </div>
+                <a class="view-link" href="#queue">View approval queue →</a>
+              </article>
+              <article class="panel spend-panel">
+                <div>
+                  <p class="eyebrow">MONTHLY SPEND</p>
+                  <h2>KES 1,284,500</h2>
+                  <p class="muted">Approved requisitions in September</p>
+                </div>
+                <div class="chart">
+                  <svg viewBox="0 0 160 70">
+                    <path
+                      d="M2 58 C20 48 22 50 38 42 S58 51 72 33 S91 38 105 23 S128 30 158 6"
+                      fill="none"
+                      stroke="#1f6b62"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <span>↑ 18%</span>
+                </div>
+              </article>
+            </aside>
+          </section>
+        </section>
+      </main>
+    </div>
+    <div
+      class="offcanvas offcanvas-start text-bg-dark"
+      tabindex="-1"
+      id="requisitionNav"
+      aria-labelledby="requisitionNavLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="requisitionNavLabel">
+          Requisition Portal
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <a class="brand offcanvas-brand mb-4" href="#dashboard"
+          ><span class="brand-mark"
+            ><img
+              src="images/file_0000000051047230a592fd301e83b357.png"
+              alt="Archdiocese of Nyeri Youth Faith on Fire logo" /></span
+          ><span>Archdiocese <b>of Nyeri</b></span></a
+        >
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item">
+            <a
+              class="nav-link nav-item active"
+              href="#dashboard"
+              data-bs-dismiss="offcanvas"
+              ><span>▦</span> Dashboard</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-item"
+              href="#requests"
+              data-bs-dismiss="offcanvas"
+              ><span>□</span> My Requisitions <em>3</em></a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-item"
+              href="#approvals"
+              data-bs-dismiss="offcanvas"
+              ><span>✓</span> Approvals <em>5</em></a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-item"
+              href="#reports"
+              data-bs-dismiss="offcanvas"
+              ><span>◫</span> Reports</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-item"
+              href="#institutions"
+              data-bs-dismiss="offcanvas"
+              ><span>⌂</span> Institutions</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="toast" id="toast">New requisition form will open here.</div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    <script src="Script.js"></script>
+  </body>
+</html>
